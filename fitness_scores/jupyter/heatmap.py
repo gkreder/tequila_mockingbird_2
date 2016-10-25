@@ -49,14 +49,15 @@ def plot_hist(filtered_barcode_scores, metric = 'score'):
 
 
 
-replicate = 'r1'
+# replicate = 'r1'
 fname_AA = './input_output_files/output/' + replicate + '_full_data.pkl'
 fname_barcode = './input_output_files/output/' + replicate + '_full_data_barcodes.pkl'
 # unpack_AA_scores(fname)
 r1_barcode_scores = unpack_barcode_scores(fname_barcode)
 r1_filtered_barcode_scores = filter_nans(r1_barcode_scores)
-# AA_scores_filtered, thrown_out_dictionary_reads_filtered = fitness_lib.map_barcode_to_AA(r1_filtered_barcode_scores)
-plot_hist(r1_filtered_barcode_scores)
+AA_scores_filtered, thrown_out_dictionary_reads_filtered = fitness_lib.map_barcode_to_AA(r1_filtered_barcode_scores)
+# plot_hist(r1_filtered_barcode_scores)
+pickle.dump(AA_scores_filtered, open('./input_output_files/output/r1_AA_scores_filtered','wb'))
 
 
 
