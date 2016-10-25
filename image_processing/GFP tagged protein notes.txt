@@ -1,0 +1,39 @@
+	Binding egosterol
+
+	Esesntial yeast steroid. Membrane integrity and potential signalling capabilities. Always present in membranes.
+	Steroids increase rigidity of membranes.
+
+	We know ampho B binds egosterol and forms ions channels (other mechanisms unkown). 
+
+	Hypothesis 1:
+		Protein SKG3 localizes to buds and bud necks (among other stuff). So we want to know buds, potentially 
+		curvature of buds. 
+
+		Hpyothesis: Binding egosterol might affect the membrane curvature (bud curvature). We have that skg3 localizes
+		to the bud. We might be able to use it to find buds and get the curvatures. 
+
+	Hypothesis 2: 
+		Cell might try to upregulate egosterol (or other bound proteins, if any. Probably none). This
+		might increase the size of the ER. We have SEC61 tagged which localizes to (rough?) ER. 
+
+
+
+
+
+		
+
+	Hypothesis 3: 
+		Mitochondria are also involved in steroid biosynthesis. We could look at mitochondria size, number, 
+		and morphology. IDH2 tags mitochondria 
+
+	Hypothesis 4: 
+		Nuclear size and morphology. Larger/absent nucleus may indicate apoptosis. Nuclear morphology
+
+	Hypothesis 5: 
+		Vacules (size)
+
+	Hypothesis 6:
+		Ion channels. We know they're formed. We think cell size may correlate with the number of ion channels. 
+
+	Hypothesis 7:
+		General Stress response proteins. Heat shock / general stress response. MSN2 nuclear localization.  
