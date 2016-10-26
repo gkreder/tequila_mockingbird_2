@@ -51,7 +51,7 @@ for pos in r1_corr_scores_temp.keys():
 	temp_y = r1_corr_scores_temp[pos]['ddgs']
 	slope, intercept, rvalue, pvalue, stderr = scipy.stats.linregress(temp_x, temp_y)
 	r1_corr_scores[pos] = rvalue
-pickle.dump(r1_corr_scores, open('./output/r1_ddg_affinity_OTSU_corr.pkl', 'wb'))
+pickle.dump(r1_corr_scores, open('./output/r1_ddg_affinity_OTU_corr.pkl', 'wb'))
 
 r2_corr_scores = {}
 for pos in r2_corr_scores_temp.keys():
@@ -60,7 +60,7 @@ for pos in r2_corr_scores_temp.keys():
 	temp_y = r2_corr_scores_temp[pos]['ddgs']
 	slope, intercept, rvalue, pvalue, stderr = scipy.stats.linregress(temp_x, temp_y)
 	r2_corr_scores[pos] = rvalue
-pickle.dump(r2_corr_scores, open('./output/r2_ddg_affinity_OTSU_corr.pkl', 'wb'))
+pickle.dump(r2_corr_scores, open('./output/r2_ddg_affinity_OTU_corr.pkl', 'wb'))
 
 # print r2_corr_scores
 	# print pos
