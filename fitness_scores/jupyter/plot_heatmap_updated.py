@@ -103,9 +103,10 @@ def plot_scores(AA_scores):
     scores[:] = np.NAN
     
     for (loc, AA) in AA_scores:
-        # print loc, AA
+        print loc, AA
         if AA != 'WT' and loc > 1 and loc < 77:
-            scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]['score']
+            # scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]['score']
+            scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]
             locs.append(loc)
 
     loc_labels = sorted(set(locs))
