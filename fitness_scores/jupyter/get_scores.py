@@ -1,4 +1,4 @@
 import fitness_lib_server
 
-replicate = 'control'
-fitness_lib_server.calc_data('control', test_run = False)
+replicate = 'r2'
+fitness_lib_server.calc_data(replicate, test_run = False)

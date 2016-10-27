@@ -37,11 +37,11 @@ barcode_scores_control_no_nan = pickle.load(open('./input_output_files/output/r2
 r1_scores = np.array([float(tup[1]) for tup in barcode_scores_r1_no_nan.values()])
 r1_scores_sorted = sorted(r1_scores, reverse = True)# counts, bin_edges = np.histogram(data, bins=num_bins, normed=True)
 # print r1_scores_sorted
-r1_cutoff_score = r1_scores_sorted[int(len(r1_scores_sorted) * .1)]
+r1_cutoff_score = r1_scores_sorted[int(len(r1_scores_sorted) * .20)]
 # print r1_cutoff_score
 
 sns.kdeplot(r1_scores, cumulative = True)
-plt.plot([r1_cutoff_score,r1_cutoff_score],[0,1],'r--', label = '10% Score Cutoff (Std Err = ' + str(r1_cutoff_score) + ')')
+plt.plot([r1_cutoff_score,r1_cutoff_score],[0,1],'r--', label = '20% Score Cutoff (Std Err = ' + str(r1_cutoff_score) + ')')
 plt.legend(loc = 4)
 plt.title('R1 Standard Error Scores (CDF)')
 plt.show()
@@ -51,11 +51,11 @@ plt.show()
 r2_scores = np.array([float(tup[1]) for tup in barcode_scores_r2_no_nan.values()])
 r2_scores_sorted = sorted(r2_scores, reverse = True)# counts, bin_edges = np.histogram(data, bins=num_bins, normed=True)
 # print r1_scores_sorted
-r2_cutoff_score = r2_scores_sorted[int(len(r2_scores_sorted) * .1)]
+r2_cutoff_score = r2_scores_sorted[int(len(r2_scores_sorted) * .20)]
 # print r1_cutoff_score
 
 sns.kdeplot(r2_scores, cumulative = True)
-plt.plot([r2_cutoff_score,r2_cutoff_score],[0,1],'r--', label = '10% Score Cutoff (Std Err = ' + str(r2_cutoff_score) + ')')
+plt.plot([r2_cutoff_score,r2_cutoff_score],[0,1],'r--', label = '20% Score Cutoff (Std Err = ' + str(r2_cutoff_score) + ')')
 plt.legend(loc = 4)
 plt.title('R2 Standard Error Scores (CDF)')
 plt.show()
@@ -65,13 +65,18 @@ plt.show()
 control_scores = np.array([float(tup[1]) for tup in barcode_scores_control_no_nan.values()])
 control_scores_sorted = sorted(control_scores, reverse = True)# counts, bin_edges = np.histogram(data, bins=num_bins, normed=True)
 # print r1_scores_sorted
-control_cutoff_score = control_scores_sorted[int(len(control_scores_sorted) * .1)]
+control_cutoff_score = control_scores_sorted[int(len(control_scores_sorted) * .20)]
 # print r1_cutoff_score
 
 sns.kdeplot(control_scores, cumulative = True)
-plt.plot([control_cutoff_score,control_cutoff_score],[0,1],'r--', label = '10% Score Cutoff (Std Err = ' + str(control_cutoff_score) + ')')
+plt.plot([control_cutoff_score,control_cutoff_score],[0,1],'r--', label = '20% Score Cutoff (Std Err = ' + str(control_cutoff_score) + ')')
 plt.legend(loc = 4)
 plt.title('Control Standard Error Scores (CDF)')
 plt.show()
+
+
+print 'r1: ' + str(r1_cutoff_score)
+print 'r2: ' + str(r2_cutoff_score)
+print 'control: ' + str(control_cutoff_score)
 
 

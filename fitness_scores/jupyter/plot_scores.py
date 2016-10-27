@@ -6,10 +6,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from operator import itemgetter
+import plot_heatmap_updated 
 
 AMINOTONUMBER_DATA = pickle.load(open('./input_output_files/input/aminotonumber.pkl', 'rb'))
 scriptname, replicate = sys.argv
-file_name = './input_output_files/output/' + replicate + '_full_data.pkl'
+file_name_filtered = './input_output_files/output/' + replicate + '_filtered_AA_scores_20'
+file_name_unfiltered = './input_output_files/output/' + replicate + '_full_data.pkl'
 
 
 def plot_hmap(data, row_labels, column_labels):
@@ -55,5 +57,12 @@ def plot_scores(AA_scores):
 
 
 
-# (AA_scores, total_reads, thrown_out_N_reads, thrown_out_dictionary_reads) = pickle.load(open(file_name, 'rb'))
-# plot_scores(AA_scores)
+(AA_scores_unfiltered, total_reads, thrown_out_N_reads, thrown_out_dictionary_reads) = pickle.load(open(file_name_unfiltered, 'rb'))
+AA_scores_filtered = pickle.load(open(file_name_filtered, 'rb'))
+# plot_heatmap_updated.plot_scores(AA_scores_filtered)
+plot_heatmap_updated.plot_scores(AA_scores_unfiltered)
+
+
+
+
+

@@ -169,7 +169,8 @@ def map_barcode_to_AA(raw_barcode_scores):
             warnings.simplefilter("ignore", category=RuntimeWarning)
             score_avg = np.nanmean(AA_scores[index_tup]['score'])
             std_err_avg = np.nanmean(AA_scores[index_tup]['std_err'])
-        AA_scores[index_tup] = {'score' : score_avg, 'std_err' : std_err_avg}
+            std_dev = np.nanstd(AA_scores[index_tup]['score'])
+        AA_scores[index_tup] = {'score' : score_avg, 'std_err' : std_err_avg, 'std_dev' : std_dev}
         if index_tup[1] == 'WT':
             WT_score_avg = score_avg
         
