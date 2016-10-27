@@ -1,8 +1,8 @@
 import pickle
 import numpy as np
 
-R1_dict = pickle.load(open('r1_full_data.pkl', 'r'))[0]
-R2_dict = pickle.load(open('r2_full_data.pkl', 'r'))[0]
+R1_dict = pickle.load(open('r1_filtered_AA_scores_20.pkl', 'r'))
+R2_dict = pickle.load(open('r2_filtered_AA_scores_20.pkl', 'r'))
 
 avg_r1_r2_full_data = {}
 
@@ -27,5 +27,5 @@ for key in R1_dict.keys():
 
 print(avg_r1_r2_full_data)
 
-with open('avg_r1_r2_full_data.pkl', 'w') as f:
+with open('weighed_avg_r1_r2_full_data.pkl', 'w') as f:
 	pickle.dump(avg_r1_r2_full_data, f)
