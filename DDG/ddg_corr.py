@@ -5,7 +5,7 @@ import scipy.stats
 
 
 ddg_affinities_OTU = {}
-with open('uby_OTU.tsv', 'rb') as csvfile:
+with open('uby_1ubq_monomer.tsv', 'rb') as csvfile:
 	spamreader = csv.reader(csvfile, delimiter='\t')
 	for row_number, row in enumerate(spamreader):
 		if row_number == 0:
@@ -60,7 +60,7 @@ for pos in r2_corr_scores_temp.keys():
 	temp_y = r2_corr_scores_temp[pos]['ddgs']
 	slope, intercept, rvalue, pvalue, stderr = scipy.stats.linregress(temp_x, temp_y)
 	r2_corr_scores[pos] = rvalue
-pickle.dump(r2_corr_scores, open('./output/r2_ddg_affinity_OTU_corr.pkl', 'wb'))
+pickle.dump(r2_corr_scores, open('./output/r2_ddg_affinity_1ubq_corr.pkl', 'wb'))
 
 # print r2_corr_scores
 	# print pos

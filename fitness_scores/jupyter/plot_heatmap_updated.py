@@ -11,7 +11,10 @@ import matplotlib
 import matplotlib.gridspec as gridspec
 from matplotlib.colors import Normalize
 from numpy import ma
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 
+
+ub_seq = 'QIFVKTLTGKTITLEVESSDTIDNVKSKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG'
 # ---------------------------------------------------------------------------------------------------------------------------------------------------
 # 
 # Plot heatmap with better colorbar
@@ -110,40 +113,66 @@ def plot_scores(AA_scores):
             locs.append(loc)
 
     loc_labels = sorted(set(locs))
+    ub_seq_list = list(ub_seq)
+    for index, c in enumerate(ub_seq_list):
+        ub_seq_list[index] = str(index + 2) + ' (' + c + ')'
+        # ub_seq_list[index] = 'blah blah blah'
+    loc_labels = ub_seq_list
+
+
     # plot_hmap(scores, loc_labels, AA_labels)
     xmin, xmax = 2, 77
     ymin, ymax = 0, 21
 
     masked_array = np.ma.array(scores, mask=np.isnan(scores))
     # masked_array = scores
-    cmap = matplotlib.cm.coolwarm
+    # cmap = matplotlib.cm.coolwarm
+    cmap = matplotlib.cm.RdBu
     cmap.set_bad('black')
-    print masked_array
+    # print masked_array
+
+    # max_score = np.amax(scores)
+    max_score = max(scores.flatten())
+    # min_score = np.amin(scores)
+    min_score = min(scores.flatten())
 
 
     fig = plt.figure()
+    # ax_temp = plt.gca()
     ax = plt.imshow(masked_array, extent=[xmin, xmax, ymin, ymax], cmap=cmap,
-            norm=MidpointNormalize(midpoint=0., vmin = -.5, vmax = .25), interpolation='none', aspect='auto')
-    # ax = plt.imshow(scores, extent=[xmin, xmax, ymin, ymax], cmap=cmap, vmin=-0.6, vmax=0.2,
-        # norm=MidpointNormalize(midpoint=0.), interpolation='none', aspect='auto')
+            norm=MidpointNormalize(midpoint=0., vmin = min_score - (min_score / 8.0), vmax = max_score - (max_score / 8.0)), 
+            interpolation='nearest', aspect='equal')
+
+    # ax = plt.imshow(masked_array, extent=[xmin, xmax, ymin, ymax], cmap=cmap,
+    #         norm=MidpointNormalize(midpoint=0., vmin = -.5, vmax = .25), interpolation='none', aspect='auto')
 
     # Major ticks
     plt.yticks(np.arange(0.5, 21.5, 1), AA_labels[::-1], fontsize=10)
-    plt.xticks(np.arange(2.5, 77.5, 1), list(range(xmin, xmax, 1)), fontsize=10)
+    # plt.xticks(np.arange(2.5, 77.5, 1), list(range(xmin, xmax, 1)), fontsize=10)
+    plt.xticks(np.arange(2.5, 77.5, 1), loc_labels, fontsize=8, rotation='vertical')
     # Minor ticks
     plt.axes().set_yticks(np.arange(ymin, ymax, 1), minor=True)
     plt.axes().set_xticks(np.arange(xmin, xmax, 1), minor=True)
-    cbar = fig.colorbar(ax)
+
+
+    # cbar = fig.colorbar(ax)
+    # plt.colorbar(ax)
+    # plt.colorbar(ax,fraction=0.046, pad=0.04)
+    # divider = make_axes_locatable(ax_temp)
+    # cax = divider.append_axes("right", size="5%", pad=0.05)
+    # plt.colorbar(ax, cax=cax)
+
+
 
     plt.axes().spines['bottom'].set_color('w')
     plt.axes().spines['top'].set_color('w') 
     plt.axes().spines['right'].set_color('w')
     plt.axes().spines['left'].set_color('w')
-    plt.grid(which='minor', color='w', linestyle='-', linewidth=2)
+    plt.grid(which='minor', color='w', linestyle='-', linewidth=1.5)
     plt.grid(which='major', color='w', linestyle='-', linewidth=0)
 
     plt.tick_params(axis=u'both', which=u'both',length=0)
-    
+    plt.tight_layout()
     plt.show()
 
     # for score in scores:
