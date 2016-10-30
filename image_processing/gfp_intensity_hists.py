@@ -36,13 +36,14 @@ def get_expected(x):
 	# return mu_1, sigma_1, 1, mu_2, sigma_2, 1
 	# return (0.04, 0.01, 150, 0.01, 0.01, 150)
 	# return (0.007, 0.003, 150, 0.017, 0.003, 150)
-	return (0.01, 0.01, 150, 0.025, 0.01, 150)
+	return (0.007, 0.003, 150, 0.017, 0.003, 150)
 
 def plot_intensity_hist(intensities_1, intensities_2, label_1, label_2):
 	fig, ax = plt.subplots()
 	# y_1, x_1 = np.histogram(intensities_1)
 	weights = np.ones_like(intensities_1)/float(len(intensities_1))
-	y_1, x_1, _ = plt.hist(intensities_1, color = 'b', alpha = 0.5, bins = 100, label = label_1, weights=weights)
+	# y_1, x_1, _ = plt.hist(intensities_1, color = 'b', alpha = 0.5, bins = 100, label = label_1, weights=weights)
+	y_1, x_1, _ = plt.hist(intensities_1, color = 'b', alpha = 0.5, bins = 100, label = label_1)
 	# print np.sum(y_1)
 	values_1 = y_1
 	in_edges_1 = x_1
@@ -60,7 +61,8 @@ def plot_intensity_hist(intensities_1, intensities_2, label_1, label_2):
 	# print mu_1_1_y
 
 	weights = np.ones_like(intensities_2)/float(len(intensities_2))
-	y_2, x_2, _ = plt.hist(intensities_2, color = 'r', alpha = 0.5, bins = 100, label = label_2, weights= weights)
+	# y_2, x_2, _ = plt.hist(intensities_2, color = 'r', alpha = 0.5, bins = 100, label = label_2, weights= weights)
+	y_2, x_2, _ = plt.hist(intensities_2, color = 'r', alpha = 0.5, bins = 100, label = label_2)
 	values_2 = y_2
 	in_edges_2 = x_2
 	x_2=(x_2[1:]+x_2[:-1])/2
@@ -197,25 +199,25 @@ def plot_intensity_hist(intensities_1, intensities_2, label_1, label_2):
 # ------------------------------------------------------------------------------------------------
 # HTB1
 # ------------------------------------------------------------------------------------------------
-# HTB1_NO_DMSO_1 = filter_intensities(pickle.load(open('./input/WellA11_gfp_intensities.pkl')))
-# HTB1_NO_DMSO_2 = filter_intensities(pickle.load(open('./input/WellB11_gfp_intensities.pkl')))
-# HTB1_DMSO_1 = filter_intensities(pickle.load(open('./input/WellC11_gfp_intensities.pkl')))
-# HTB1_DMSO_2 = filter_intensities(pickle.load(open('./input/WellD11_gfp_intensities.pkl')))
-# HTB1_PERTURB_1_1 = filter_intensities(pickle.load(open('./input/WellE11_gfp_intensities.pkl')))
-# HTB1_PERTURB_1_2 = filter_intensities(pickle.load(open('./input/WellF11_gfp_intensities.pkl')))
-# HTB1_PERTURB_2_1 = filter_intensities(pickle.load(open('./input/WellG11_gfp_intensities.pkl')))
-# HTB1_PERTURB_2_2 = filter_intensities(pickle.load(open('./input/WellH11_gfp_intensities.pkl')))
+HTB1_NO_DMSO_1 = filter_intensities(pickle.load(open('./input/WellA11_gfp_intensities.pkl')))
+HTB1_NO_DMSO_2 = filter_intensities(pickle.load(open('./input/WellB11_gfp_intensities.pkl')))
+HTB1_DMSO_1 = filter_intensities(pickle.load(open('./input/WellC11_gfp_intensities.pkl')))
+HTB1_DMSO_2 = filter_intensities(pickle.load(open('./input/WellD11_gfp_intensities.pkl')))
+HTB1_PERTURB_1_1 = filter_intensities(pickle.load(open('./input/WellE11_gfp_intensities.pkl')))
+HTB1_PERTURB_1_2 = filter_intensities(pickle.load(open('./input/WellF11_gfp_intensities.pkl')))
+HTB1_PERTURB_2_1 = filter_intensities(pickle.load(open('./input/WellG11_gfp_intensities.pkl')))
+HTB1_PERTURB_2_2 = filter_intensities(pickle.load(open('./input/WellH11_gfp_intensities.pkl')))
 
-# HTB1_NO_DMSO = np.concatenate((HTB1_NO_DMSO_1, HTB1_NO_DMSO_2))
-# HTB1_PERTURB_1 = np.concatenate((HTB1_PERTURB_1_1, HTB1_PERTURB_1_2))
-# HTB1_PERTURB_2 = np.concatenate((HTB1_PERTURB_2_1, HTB1_PERTURB_2_2))
-# HTB1_PERTURB_TOTAL = np.concatenate((HTB1_PERTURB_1, HTB1_PERTURB_2))
-# HTB1_DMSO = np.concatenate((HTB1_DMSO_1, HTB1_DMSO_2))
-# plot_intensity_hist(HTB1_DMSO, HTB1_PERTURB_TOTAL, 'DMSO CONTROL', 'PERTURB')
-# HTB1_DMSO_EXPECTED = (0.007, 0.003, 150, 0.017, 0.003, 150)
-# # HTB1_PERTURB_EXPECTED = (0.025, 0.025, 150, 0.25, 0.05, 150)
-# # plt.hist(HTB1_PERTURB_TOTAL, bins = 50)
-# plt.show()
+HTB1_NO_DMSO = np.concatenate((HTB1_NO_DMSO_1, HTB1_NO_DMSO_2))
+HTB1_PERTURB_1 = np.concatenate((HTB1_PERTURB_1_1, HTB1_PERTURB_1_2))
+HTB1_PERTURB_2 = np.concatenate((HTB1_PERTURB_2_1, HTB1_PERTURB_2_2))
+HTB1_PERTURB_TOTAL = np.concatenate((HTB1_PERTURB_1, HTB1_PERTURB_2))
+HTB1_DMSO = np.concatenate((HTB1_DMSO_1, HTB1_DMSO_2))
+plot_intensity_hist(HTB1_DMSO, HTB1_PERTURB_TOTAL, 'DMSO CONTROL', 'PERTURB')
+HTB1_DMSO_EXPECTED = (0.007, 0.003, 150, 0.017, 0.003, 150)
+# HTB1_PERTURB_EXPECTED = (0.025, 0.025, 150, 0.25, 0.05, 150)
+# plt.hist(HTB1_PERTURB_TOTAL, bins = 50)
+plt.show()
 # ------------------------------------------------------------------------------------------------
 
 
@@ -272,24 +274,24 @@ def plot_intensity_hist(intensities_1, intensities_2, label_1, label_2):
 # ------------------------------------------------------------------------------------------------
 # LSM1
 # ------------------------------------------------------------------------------------------------
-LSM1_NO_DMSO_1 = filter_intensities(pickle.load(open('./input/WellA01_gfp_intensities.pkl')))
-LSM1_NO_DMSO_2 = filter_intensities(pickle.load(open('./input/WellB01_gfp_intensities.pkl')))
-LSM1_DMSO_1 = filter_intensities(pickle.load(open('./input/WellC01_gfp_intensities.pkl')))
-LSM1_DMSO_2 = filter_intensities(pickle.load(open('./input/WellD01_gfp_intensities.pkl')))
-LSM1_PERTURB_1_1 = filter_intensities(pickle.load(open('./input/WellE01_gfp_intensities.pkl')))
-LSM1_PERTURB_1_2 = filter_intensities(pickle.load(open('./input/WellF01_gfp_intensities.pkl')))
-LSM1_PERTURB_2_1 = filter_intensities(pickle.load(open('./input/WellG01_gfp_intensities.pkl')))
-LSM1_PERTURB_2_2 = filter_intensities(pickle.load(open('./input/WellH01_gfp_intensities.pkl')))
+# LSM1_NO_DMSO_1 = filter_intensities(pickle.load(open('./input/WellA01_gfp_intensities.pkl')))
+# LSM1_NO_DMSO_2 = filter_intensities(pickle.load(open('./input/WellB01_gfp_intensities.pkl')))
+# LSM1_DMSO_1 = filter_intensities(pickle.load(open('./input/WellC01_gfp_intensities.pkl')))
+# LSM1_DMSO_2 = filter_intensities(pickle.load(open('./input/WellD01_gfp_intensities.pkl')))
+# LSM1_PERTURB_1_1 = filter_intensities(pickle.load(open('./input/WellE01_gfp_intensities.pkl')))
+# LSM1_PERTURB_1_2 = filter_intensities(pickle.load(open('./input/WellF01_gfp_intensities.pkl')))
+# LSM1_PERTURB_2_1 = filter_intensities(pickle.load(open('./input/WellG01_gfp_intensities.pkl')))
+# LSM1_PERTURB_2_2 = filter_intensities(pickle.load(open('./input/WellH01_gfp_intensities.pkl')))
 
-LSM1_NO_DMSO = np.concatenate((LSM1_NO_DMSO_1, LSM1_NO_DMSO_2))
-LSM1_PERTURB_1 = np.concatenate((LSM1_PERTURB_1_1, LSM1_PERTURB_1_2))
-LSM1_PERTURB_2 = np.concatenate((LSM1_PERTURB_2_1, LSM1_PERTURB_2_2))
-LSM1_PERTURB_TOTAL = np.concatenate((LSM1_PERTURB_1, LSM1_PERTURB_2))
-LSM1_DMSO = np.concatenate((LSM1_DMSO_1, LSM1_DMSO_2))
-plot_intensity_hist(LSM1_DMSO, LSM1_PERTURB_TOTAL, 'DMSO CONTROL', 'PERTURB')
-# LSM1_DMSO_EXPECTED = (0.01, 0.01, 150, 0.05, 0.01, 150)
-# LSM1_PERTURB_EXPECTED = (0.025, 0.025, 150, 0.25, 0.05, 150)
-# plt.hist(LSM1_PERTURB_TOTAL, bins = 50)
-plt.show()
+# LSM1_NO_DMSO = np.concatenate((LSM1_NO_DMSO_1, LSM1_NO_DMSO_2))
+# LSM1_PERTURB_1 = np.concatenate((LSM1_PERTURB_1_1, LSM1_PERTURB_1_2))
+# LSM1_PERTURB_2 = np.concatenate((LSM1_PERTURB_2_1, LSM1_PERTURB_2_2))
+# LSM1_PERTURB_TOTAL = np.concatenate((LSM1_PERTURB_1, LSM1_PERTURB_2))
+# LSM1_DMSO = np.concatenate((LSM1_DMSO_1, LSM1_DMSO_2))
+# plot_intensity_hist(LSM1_DMSO, LSM1_PERTURB_TOTAL, 'DMSO CONTROL', 'PERTURB')
+# # LSM1_DMSO_EXPECTED = (0.01, 0.01, 150, 0.05, 0.01, 150)
+# # LSM1_PERTURB_EXPECTED = (0.025, 0.025, 150, 0.25, 0.05, 150)
+# # plt.hist(LSM1_PERTURB_TOTAL, bins = 50)
+# plt.show()
 # ------------------------------------------------------------------------------------------------
 
