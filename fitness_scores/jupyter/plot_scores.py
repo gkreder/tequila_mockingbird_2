@@ -10,10 +10,10 @@ import plot_heatmap_updated
 
 AMINOTONUMBER_DATA = pickle.load(open('./input_output_files/input/aminotonumber.pkl', 'rb'))
 scriptname, replicate = sys.argv
-# file_name_filtered = './input_output_files/output/' + replicate + '_filtered_AA_scores_20'
+file_name_filtered = './input_output_files/output/' + replicate + '_filtered_AA_scores_20'
 # file_name_unfiltered = './input_output_files/output/' + replicate + '_full_data.pkl'
-file_name_filtered = '../../kevin_scripts_final/weighed_avg_fitness_difference_dict.pkl'
-# file_name_filtered = './input_output_files/output/control_full_data.pkl'
+# file_name_filtered = '../../kevin_scripts_final/weighed_avg_fitness_difference_dict.pkl'
+# file_name_filtered = './input_output_files/output/r2_full_data.pkl'
 
 
 def plot_hmap(data, row_labels, column_labels):

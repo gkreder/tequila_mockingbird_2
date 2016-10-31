@@ -2,7 +2,7 @@ import fitness_lib
 import pickle
 import sys
 import numpy as np
-
+import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from operator import itemgetter
@@ -12,6 +12,7 @@ import matplotlib.gridspec as gridspec
 from matplotlib.colors import Normalize
 from numpy import ma
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from scipy.misc import toimage
 
 
 ub_seq = 'QIFVKTLTGKTITLEVESSDTIDNVKSKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG'
@@ -108,8 +109,8 @@ def plot_scores(AA_scores):
     for (loc, AA) in AA_scores:
         print loc, AA
         if AA != 'WT' and loc > 1 and loc < 77:
-            # scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]['score']
-            scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]
+            scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]['score']
+            # scores[int(AMINOTONUMBER_DATA[AA]), int(loc - 2)] = AA_scores[(loc, AA)]
             locs.append(loc)
 
     loc_labels = sorted(set(locs))
@@ -137,9 +138,34 @@ def plot_scores(AA_scores):
     min_score = min(scores.flatten())
 
 
+    # ------------------------------------------------------------------------
+
+    # norm = Normalize()
+    norm=MidpointNormalize(midpoint=0., vmin = min_score - (min_score / 8.0), vmax = max_score - (max_score / 8.0))
+    scores_colors = cmap(norm(masked_array))
+    # scores_colors = toimage(scores)
+    col1 = colors.colorConverter.to_rgba('g')
+    # col2 = colors.colorConverter.to_rgba('b')
+    # print '------------------------------'
+    # print col1
+    # print '------------------------------'
+    for row_index, row in enumerate(scores):
+        for col_index, val in enumerate(row):
+            # print AA_labels[::-1][row_index], ub_seq[col_index]
+            if AA_labels[row_index] == ub_seq[col_index]:
+                scores_colors[row_index, col_index] = col1
+            # else:
+                # scores_colors[row_index, col_index] = scores[row_index, col_index]
+
+    # ------------------------------------------------------------------------
+
+
+
+
     fig = plt.figure()
     # ax_temp = plt.gca()
-    ax = plt.imshow(masked_array, extent=[xmin, xmax, ymin, ymax], cmap=cmap,
+    temp = np.ones(masked_array.shape)
+    ax = plt.imshow(scores_colors, extent=[xmin, xmax, ymin, ymax], cmap=cmap,
             norm=MidpointNormalize(midpoint=0., vmin = min_score - (min_score / 8.0), vmax = max_score - (max_score / 8.0)), 
             interpolation='nearest', aspect='equal')
 
@@ -164,6 +190,50 @@ def plot_scores(AA_scores):
 
 
 
+    # ----------------------------------------------------------------
+    #  Adding WT boxes
+    # ----------------------------------------------------------------
+    # ax = plt.axes()
+    # xpositions, ypositions = np.meshgrid(ax.get_xticks(), ax.get_yticks())
+    # xlabels = ax.xaxis.get_majorticklabels()#[0].get_text()
+    # ylabels = ax.yaxis.get_majorticklabels()  # [0].get_text()
+
+    # ind = np.linspace(1,76, 76)
+    # move = (ypositions[1][0] - ypositions[0][0])/2
+    # for j in range(len(xlabels)):
+    #   for k in range(len(ylabels)):
+    #       # xlab = xlabels[j].get_text()
+    #       # ylab = ylabels[k].get_text()
+    #       xpos = xpositions[k][j]
+    #       ypos = ypositions[2][j]
+    #       # if xlab not in ind:
+    #       #     continue
+    #       # value = str(sea_df.ix[xlab][ylab])
+    #       # if float(value) > 0:
+    #       #     symbol_to_print  = '+'
+    #       #     ax.text(xpos,ypos - move,symbol_to_print,fontsize=9)
+    #       ax.text(xpos, ypos, '*', fontsize = 12)
+
+
+    # norm = colors.normalize()
+    # scores_colors = cmap(norm(scores))
+    # col1 = colors.colorConverter.to_rgba('g')
+    # print '------------------------------'
+    # print col1
+    # print '------------------------------'
+    # for row_index, row in enumerate(scores):
+    #     for col_index, val in enumerate(row):
+    #         # print AA_labels[::-1][row_index], ub_seq[col_index]
+    #         if AA_labels[::-1][row_index] == ub_seq[col_index]:
+    #             scores_colors[row_index, col_index] = col1
+
+    # ----------------------------------------------------------------
+
+
+
+
+
+
     plt.axes().spines['bottom'].set_color('w')
     plt.axes().spines['top'].set_color('w') 
     plt.axes().spines['right'].set_color('w')
@@ -185,6 +255,31 @@ def plot_scores(AA_scores):
 
 
 
+
+# pl = sns.clustermap(data, figsize=(coor1, coor2))
+# plt.setp(ax.yaxis.get_majorticklabels(), rotation=0)
+# plt.setp(ax.xaxis.get_majorticklabels(), rotation=90, fontsize=fonts)
+# xpositions, ypositions = np.meshgrid(ax.get_xticks(), ax.get_yticks())
+# xlabels = ax.xaxis.get_majorticklabels()#[0].get_text()
+# ylabels = ax.yaxis.get_majorticklabels()  # [0].get_text()
+# # print(xpositions.shape) # 67,73
+# # print(ypositions.shape) # 67,73
+# # print(len(xlabels)) #73
+# # print(len(ylabels)) #67
+# ind = sea_df.index
+# move = (ypositions[1][0] - ypositions[0][0])/2
+# for j in range(len(xlabels)):
+#   for k in range(len(ylabels)):
+#       xlab = xlabels[j].get_text()
+#       ylab = ylabels[k].get_text()
+#       xpos = xpositions[k][j]
+#       ypos = ypositions[k][j]
+#       if xlab not in ind:
+#           continue
+#       value = str(sea_df.ix[xlab][ylab])
+#       if float(value) > 0:
+#           symbol_to_print  = '+'
+#           ax.text(xpos,ypos - move,symbol_to_print,fontsize=9)
 
 
 
