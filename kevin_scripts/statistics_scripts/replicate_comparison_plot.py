@@ -26,6 +26,6 @@ plt.ylim(-1,0.8)
 plt.xlabel('fitness_rep1',fontsize=12)
 plt.ylabel('fitness_rep2',fontsize = 12)
 plt.legend(loc=0)
-plt.savefig('fitness_rep1_vs_rep2.png',dpi=300)
+# plt.savefig('fitness_rep1_vs_rep2.png',dpi=300)
 
 plt.show()
